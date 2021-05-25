@@ -428,7 +428,7 @@ const build = (repository, dockerfile, buildArgs) => __awaiter(void 0, void 0, v
 });
 const push = (repository, registry) => __awaiter(void 0, void 0, void 0, function* () {
     core.info(`Pushing docker image to ${registry}`);
-    cp.execSync(`docker push ${registry}/${repository}`);
+    cp.execSync(`docker push ${repository}`);
 });
 const buildCommand = (dockerfile, repository, buildArgs) => {
     let createBuildCommand = `docker build -t ${repository}`;
