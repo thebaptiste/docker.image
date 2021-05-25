@@ -437,7 +437,7 @@ const buildCommand = (dockerfile, repository, buildArgs) => {
         const argsSuffix = buildArgsArray.map(arg => `--build-arg ${arg}`).join(' ');
         createBuildCommand = `${createBuildCommand} ${argsSuffix}`;
     }
-    return `${createBuildCommand} ${dockerfile}`;
+    return `${createBuildCommand} .`;
 };
 run();
 
