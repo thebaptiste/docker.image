@@ -16,7 +16,7 @@ async function run(): Promise<void> {
     })
     const dockerfile = core.getInput('dockerfile') || 'dockerfile'
 
-    const repository = `${registry}/${imageName}:${imageTag}`
+    const repository = `${imageName}:${imageTag}`
 
     login(registry, registryUsername, registryPassword)
       .then(() =>
