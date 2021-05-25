@@ -404,7 +404,7 @@ function run() {
             build(repository, dockerfile, buildArgs)
                 .then(() => core.info(`Successfully Building docker image: ${imageName}:${imageTag}.`))
                 .catch(err => core.setFailed(err.message));
-            cp.execSync(`docker images -a`);  
+            core.info(cp.execSync(`docker images -a`));  
             push(repository, registry)
                 .then(() => core.info(`Successfully Pushing docker image to ${registry}.`))
                 .catch(err => core.setFailed(err.message));
