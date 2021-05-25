@@ -49,7 +49,7 @@ const login = async (
 ): Promise<void> => {
   core.info(`Logging into Docker registry ${registry}.`)
   cp.execSync(
-    `docker login -u ${registryUsername} --password-stdin ${registry} >/dev/null 2>&1`,
+    `docker login -u ${registryUsername} --password-stdin ${registry}`,
     {
       input: registryPassword
     }
@@ -67,7 +67,7 @@ const build = async (
 
   core.info(`Building docker image: ${repository}`)
   cp.execSync(
-    `${buildCommand(dockerfile, repository, buildArgs)} >/dev/null 2>&1`
+    `${buildCommand(dockerfile, repository, buildArgs)}`
   )
 }
 
