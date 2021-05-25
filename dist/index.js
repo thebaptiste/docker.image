@@ -397,7 +397,7 @@ function run() {
                 required: true
             });
             const dockerfile = core.getInput('dockerfile') || 'dockerfile';
-            const repository = `${registry}/${imageName}:${imageTag}`;
+            const repository = `${imageName}:${imageTag}`;
             login(registry, registryUsername, registryPassword)
                 .then(() => core.info(`Successfully Logging into Docker registry ${registry}.`))
                 .catch(err => core.setFailed(err.message));
@@ -415,7 +415,7 @@ function run() {
 }
 const login = (registry, registryUsername, registryPassword) => __awaiter(void 0, void 0, void 0, function* () {
     core.info(`Logging into Docker registry ${registry}.`);
-    cp.execSync(`docker login -u ${registryUsername} --password-stdin ${registry} >/dev/null 2>&1`, {
+    cp.execSync(`docker login -u ${registryUsername} --password-stdin ${registry}`, {
         input: registryPassword
     });
 });
@@ -424,11 +424,11 @@ const build = (repository, dockerfile, buildArgs) => __awaiter(void 0, void 0, v
         core.setFailed(`Dockerfile does not exist in location ${dockerfile}`);
     }
     core.info(`Building docker image: ${repository}`);
-    cp.execSync(`${buildCommand(dockerfile, repository, buildArgs)} >/dev/null 2>&1`);
+    cp.execSync(`${buildCommand(dockerfile, repository, buildArgs)}`);
 });
 const push = (repository, registry) => __awaiter(void 0, void 0, void 0, function* () {
     core.info(`Pushing docker image to ${registry}`);
-    cp.execSync(`docker push ${repository}  >/dev/null 2>&1`);
+    cp.execSync(`docker push ${repository}`);
 });
 const buildCommand = (dockerfile, repository, buildArgs) => {
     let createBuildCommand = `docker build -t ${repository}`;
